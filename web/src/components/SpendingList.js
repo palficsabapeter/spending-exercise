@@ -11,9 +11,22 @@ import {
   AmountWrapper,
 } from "../styles/ComponentStyles";
 
-export default function SpendingList({ spendings, setSpendings }) {
+export default function SpendingList({ spendings, setSpendings, currencyFilter }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  function filterSpendingsByCurrency() {
+    let result = []
+    if (currencyFilter !== '') {
+      for (const spending of spendings) {
+        if (spending.currency === currencyFilter)
+          result.push(spending);
+      }
+      return result;
+    } else {
+      return spendings
+    }
+  }
 
   useEffect(() => {
     setLoading(true);
@@ -61,7 +74,7 @@ export default function SpendingList({ spendings, setSpendings }) {
         </h1>
       )}
       {spendings.length > 0 &&
-        spendings.map((spending) => (
+        filterSpendingsByCurrency(currencyFilter).map((spending) => (
           <Spending key={spending.id}>
             <IconWrapper>
               <FiDollarSign color="var(--color-blue)" />

@@ -2,8 +2,10 @@ import React from 'react';
 
 import { FiltersWrapper, Orderings, CurrencyFilters, CurrencyButton } from '../styles/ComponentStyles';
 
-export default function CurrencyFilter({
-}) {
+export default function CurrencyFilter({ currencyFilter, setCurrencyFilter }) {
+  const switchFilter = (e) => {
+    setCurrencyFilter(e.target.name);
+  }
 
   return (
     <>
@@ -20,6 +22,8 @@ export default function CurrencyFilter({
           <li>
             <CurrencyButton
               name=''
+              onClick={(e) => switchFilter(e)}
+              currencyFilter={currencyFilter}
             >
               ALL
             </CurrencyButton>
@@ -27,6 +31,8 @@ export default function CurrencyFilter({
           <li>
             <CurrencyButton
               name='HUF'
+              onClick={(e) => switchFilter(e)}
+              currencyFilter={currencyFilter}
             >
               HUF
             </CurrencyButton>
@@ -34,6 +40,8 @@ export default function CurrencyFilter({
           <li>
             <CurrencyButton
               name='USD'
+              onClick={(e) => switchFilter(e)}
+              currencyFilter={currencyFilter}
             >
               USD
             </CurrencyButton>
