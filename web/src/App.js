@@ -9,6 +9,7 @@ import { createBrowserHistory } from "history";
 export default function App() {
   const [spendings, setSpendings] = useState([]);
   const [currencyFilter, setCurrencyFilter] = useState('');
+  const [ordering, setOrdering] = useState('-desc');
   const history = createBrowserHistory();
   
   useEffect(() => {
@@ -17,11 +18,14 @@ export default function App() {
     if (filtersFromParams.currencyFilter) {
       setCurrencyFilter(String(filtersFromParams.currencyFilter));
     }
+    if (filtersFromParams.ordering) {
+      setOrdering(String(filtersFromParams.ordering));
+    }
   }, []);
 
   useEffect(() => {
-    history.push(`?currencyFilter=${currencyFilter}`);
-  }, [currencyFilter]);
+    history.push(`?currencyFilter=${currencyFilter}&ordering=${ordering}`);
+  }, [currencyFilter, ordering]);
 
   return (
     <>
@@ -30,11 +34,14 @@ export default function App() {
         <FiltersAndOrderings
           currencyFilter={currencyFilter}
           setCurrencyFilter={setCurrencyFilter}
+          ordering={ordering}
+          setOrdering={setOrdering}
         />
         <SpendingList
           spendings={spendings}
           setSpendings={setSpendings}
           currencyFilter={currencyFilter}
+          ordering={ordering}
         />
       </Layout>
     </>

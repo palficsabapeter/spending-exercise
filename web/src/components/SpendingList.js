@@ -11,20 +11,43 @@ import {
   AmountWrapper,
 } from "../styles/ComponentStyles";
 
-export default function SpendingList({ spendings, setSpendings, currencyFilter }) {
+export default function SpendingList({ spendings, setSpendings, currencyFilter, ordering }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  function filterSpendingsByCurrency() {
-    let result = []
+  function filterByCurrency(list) {
+    let result = [];
     if (currencyFilter !== '') {
-      for (const spending of spendings) {
+      for (const spending of list) {
         if (spending.currency === currencyFilter)
           result.push(spending);
       }
       return result;
     } else {
-      return spendings
+      return list;
+    }
+  }
+
+  function orderByDate(list) {
+    return list.sort((a, b) => a.spent_at - b.spent_at);
+  }
+
+  function orderByAmount(list) {
+    return list.sort((a, b) => a.amount - b.amount);
+  }
+
+  function order(list) {
+    switch(ordering) {
+      case '-date':
+        return orderByDate(list).reverse();
+      case 'date':
+        return orderByDate(list);
+      case '-amount_in_huf':
+        return orderByAmount(list).reverse();
+      case 'amount_in_huf':
+        return orderByAmount(list);
+      default:
+        return orderByDate(list).reverse();
     }
   }
 
@@ -74,7 +97,7 @@ export default function SpendingList({ spendings, setSpendings, currencyFilter }
         </h1>
       )}
       {spendings.length > 0 &&
-        filterSpendingsByCurrency(currencyFilter).map((spending) => (
+        order(filterByCurrency(spendings)).map((spending) => (
           <Spending key={spending.id}>
             <IconWrapper>
               <FiDollarSign color="var(--color-blue)" />
