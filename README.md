@@ -57,7 +57,7 @@ Then I see an error indicating the missing field
 
 Given there are existing spendings in the list
 When I change the selected ordering
-Then the list is reorder by the selection
+Then the list is reordered by the selection
 
 Given there are existing spendings in the list
 When I click on a currency filter button (HUF, USD, All)
@@ -83,7 +83,20 @@ If there are any pre-existing patterns in the code that you don't like, feel fre
 
 ## Getting Started
 
-### Option #1: Run the Python/Flask API
+### Run the containerized database
+
+Install docker and docker-compose
+
+Run:
+```shell
+docker-compose up -d
+```
+
+Or you can specify your own DB connection in the python/.env file.
+Make sure you don't write any production info here,
+this was only commited for ease of use.
+
+### Run the backend
 
 This project is best run using **Python 3.7.9**.
 
@@ -91,6 +104,14 @@ Install python dependencies:
 
 ```shell
 cd python && pip install -r requirements.txt
+```
+
+Run DB migrations:
+```shell
+cd python
+python manage.py makemigrations
+python manage.py makemigrations backend
+python && python manage.py migrate
 ```
 
 Run the python tests:
@@ -102,30 +123,10 @@ cd python && pytest tests.py
 Run the API (http://localhost:5000):
 
 ```shell
-cd python && FLASK_APP=app python -m flask run
+cd python && python manage.py runserver 5000
 ```
 
-### Option #2: Run the Node/Express API
-
-This project is best run using **Node 14.17.x**.
-
-```shell
-cd node && npm i
-```
-
-Run the node tests:
-
-```shell
-cd node && npm test
-```
-
-Run the API (http://localhost:5000):
-
-```shell
-cd node && npm start
-```
-
-### Both: Run the JS/React Web Client
+### Run the JS/React Web Client
 
 This project is best run using **Node 14.17.x**.
 
