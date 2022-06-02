@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:14.3
+    environment:
+      - POSTGRES_USER=spending-exercise-admin
+      - POSTGRES_PASSWORD=pw
+      - POSTGRES_DB=spending-exercise
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+volumes:
+  db-data:
