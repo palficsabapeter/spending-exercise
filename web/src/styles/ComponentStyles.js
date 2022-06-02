@@ -236,3 +236,23 @@ export const ErrorMessage = styled.h1`
   border-radius: 8px;
   max-width: 80%;
 `;
+
+export const AlertHidden = styled.h1`
+  text-align: center;
+  margin: 1rem auto;
+  font-size: 16px;
+  padding: 5px 7px;
+  border-radius: 8px;
+  opacity: 0;
+`;
+
+export const AlertBox = styled.h1`
+  text-align: center;
+  margin: 1rem auto;
+  font-size: 16px;
+  background-color: #fb7c7d;
+  color: var(--color-white);
+  padding: 5px 7px;
+  border-radius: 8px;
+  max-width: 80%;
+`;
