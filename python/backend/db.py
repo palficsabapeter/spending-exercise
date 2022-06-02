@@ -15,7 +15,7 @@ class Database():
         try:
             self.conn = psycopg2.connect(host = HOST, database = NAME, user = USER, password = PASS)
             cur = self.conn.cursor()
-            cur.execute('SELECT description, amount, spent_at, currency from backend_spending;')
+            cur.execute('SELECT id, description, amount, spent_at, currency from backend_spending;')
             rows = cur.fetchall()
             cur.close()
             return rows
