@@ -29,11 +29,21 @@ export default function SpendingList({ spendings, setSpendings, currencyFilter, 
   }
 
   function orderByDate(list) {
-    return list.sort((a, b) => a.spent_at - b.spent_at);
+    return list.sort((a, b) => new Date(a.spent_at) - new Date(b.spent_at));
   }
 
   function orderByAmount(list) {
-    return list.sort((a, b) => a.amount - b.amount);
+    return list.sort((a, b) => {
+      if (a.currency !== b.currency) {
+        if (a.currency === 'USD') {
+          return a.amount * 365 - b.amount;
+        } else {
+          return a.amount - b.amount * 365;
+        }
+      } else {
+        return a.amount - b.amount;
+      }
+    });
   }
 
   function order(list) {

@@ -32,13 +32,11 @@ export default function Form() {
     });
   }
 
-  async function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (state.description === '') {
-      console.error('empty')
       setError({isError: true, msg: 'Description cannot be empty'})
     } else if (state.amount === 0 || state.amount < 0) {
-      console.log('no_amount')
       setError({isError: true, msg: 'Amount cannot be zero or negative'})
     } else {
       fetch('http://localhost:5000/spendings/', {
@@ -58,8 +56,8 @@ export default function Form() {
         setEmptyState();
         window.location.reload();
       })
-  }
-}
+    }
+  };
 
   return (
     <>
@@ -96,7 +94,7 @@ export default function Form() {
           <option value='HUF'>HUF</option>
           <option value='USD'>USD</option>
         </SelectStyles>
-        <InputStyles type='submit' value='Save' onClick={handleSubmit}/>
+        <InputStyles type='submit' value='Save' onClick={(e) => handleSubmit(e)}/>
       </FormStyles>
     </>
   );  
