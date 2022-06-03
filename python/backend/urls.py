@@ -19,6 +19,5 @@ from django.contrib import admin
 from django.urls import path
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('spendings/', views.handleSpendingsReq)
+    path('spendings/', views.handleSpendingsReq, name = 'spendings')
 ]

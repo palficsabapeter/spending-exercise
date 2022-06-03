@@ -109,15 +109,13 @@ cd python && pip install -r requirements.txt
 Run DB migrations:
 ```shell
 cd python
-python manage.py makemigrations
-python manage.py makemigrations backend
-python && python manage.py migrate
+python manage.py migrate
 ```
 
 Run the python tests:
 
 ```shell
-cd python && pytest tests.py
+cd python && python manage.py test backend
 ```
 
 Run the API (http://localhost:5000):

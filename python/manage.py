@@ -3,8 +3,6 @@
 import os
 import sys
 
-from backend.db import Database
-
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
